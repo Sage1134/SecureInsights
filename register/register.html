@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Register</title>
+        <link rel="Stylesheet" type="text/css" href="registerStylesheet.css">
+    </head>
+    <body>
+        <h1 id="headerTitle">Crime Tipper</h1>
+        <div class="container">
+            <form id="registerForm" onsubmit="register(event)">
+                <label>Username:</label>
+                <input type="text" id="username" required>
+                
+                <label>Password:</label>
+                <input type="password" id="password" required>
+                
+                <label>Confirm Password:</label>
+                <input type="password" id="password" required>
+                
+                <button type="submit">Register</button>
+            </form>
+            <a href="../signIn/signIn.html" id="signIn">Sign In</a>
+            <a href="../tipForm/tipForm.html" id="tipForm">Tip Crime</a>
+        </div>
+    </body>
+    <script type="text/javascript" src="registerScript.js"></script>
+</html>

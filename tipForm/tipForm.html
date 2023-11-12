@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Tip A Crime</title>
+        <link rel="Stylesheet" type="text/css" href="tipFormStylesheet.css">
+    </head>
+    <body>
+
+        <h1>Crime Tipping Form</h1>
+    
+        <form id="crimeForm" action="submit_handler.php" method="post">
+            <!-- Type of Incident -->
+            <label>Type of Incident:</label>
+            <input type="text" id="incidentType" required>
+        
+            <!-- Date and Time -->
+            <label>Date and Time:</label>
+            <input type="datetime-local" id="dateTime" required>
+        
+            <!-- Location -->
+            <label>Location:</label>
+            <input type="text" id="location" required>
+        
+            <!-- Description -->
+            <label>Description:</label>
+            <textarea id="description" rows="4" required></textarea>
+        
+            <!-- Other Details -->
+            <label>Other Details:</label>
+            <textarea id="otherDetails" rows="4"></textarea>
+        
+            <!-- User Contact with Anonymity Option -->
+            <label>Your Contact (optional):</label>
+            <input type="text" id="userContact">
+        
+            <label>Submit Anonymously:</label>
+            <input type="checkbox" id="anonymity">
+        
+            <!-- Confirmation and Consent -->
+            <label>I confirm the accuracy of this information:</label>
+            <input type="checkbox" id="confirmation" required>
+        
+            <label>I consent to share this information with law enforcement:</label>
+            <input type="checkbox" id="consent" required>
+        
+            <!-- Submit Button -->
+            <button type="submit">Submit</button>
+        </form>
+
+        <a href="../signIn/signIn.html" id="signIn">Sign In</a>
+        <a href="../register/register.html" id="tipForm">Register</a>
+
+        <script type="text/javascript" src="tipFormScript.js"></script>
+
+    </body>
+</html>
