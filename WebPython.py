@@ -2,9 +2,12 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 import websockets
 import os
+import asyncio
+import json
+import hashlib
 
 load_dotenv("Vars.env")
-uri = os.environ.get("Vars.env", "MONGODB_URI")
+uri = os.environ.get("MONGODB_URI")
 
 client = MongoClient(uri)
 database = client["CrimeTipper"]
@@ -81,3 +84,43 @@ def delData(path):
                 break
         else:
             collection.delete_one({"_id":target})
+
+
+connectedClients = set()
+ip = os.environ.get("ServerIP")
+port = os.environ.get("Port")
+
+async def newClientConnected(client_socket):
+    try:
+        connectedClients.add(client_socket)
+        connectionPurpose = await client_socket.recv()
+        if connectionPurpose == "Registration":
+            await register(client_socket)
+    except:
+        pass
+
+async def register(client_socket):
+    try:
+        username = await client_socket.recv()
+        password = await client_socket.recv()
+
+        if getData(["Credentials", username]) == None:
+            hash_object = hashlib.sha256()
+            hash_object.update(password.encode())
+            hashed_password = hash_object.hexdigest()
+            setData(["Credentials", username], hashed_password)
+            await client_socket.send("Registration Successful!")
+        else:
+            await client_socket.send("Username Already Taken")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
+async def startServer():
+    print("Server Started")
+    await websockets.serve(newClientConnected, ip, port)
+    
+event_loop = asyncio.get_event_loop()
+event_loop.run_until_complete(startServer())
+event_loop.run_forever()
