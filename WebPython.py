@@ -1,5 +1,6 @@
 from pymongo import MongoClient
 from dotenv import load_dotenv
+import websockets
 import os
 
 load_dotenv("Vars.env")
@@ -80,10 +81,3 @@ def delData(path):
                 break
         else:
             collection.delete_one({"_id":target})
-
-
-setData(["banana", "lol"], 2)
-setData(["test", "test"], "chicken")
-setData(["test", "ok", "cool"], 3)
-
-delData(["test", "ok"])
