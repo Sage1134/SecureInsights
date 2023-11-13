@@ -30,7 +30,8 @@ function submit(event) {
         consent: consent
     };
 
-    const socket = new WebSocket('ws://10.0.0.138:1134')
+    const isLocalConnection = window.location.hostname === '10.0.0.138';
+    const socket = new WebSocket(isLocalConnection ? 'ws://10.0.0.138:1134' : 'ws://99.245.65.253:1134');
 
     socket.onopen = function (event) {
         socket.send("Submission")
