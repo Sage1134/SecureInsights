@@ -1,23 +1,37 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: monospace;
     background-color: rgb(20, 20, 40);
     margin: 0;
-    display: flex;
     align-items: center;
-    justify-content: center;
     height: 100vh;
-}
-
-form {
     display: flex;
     flex-direction: column;
 }
 
+form {
+    padding: 40px;
+    border-radius: 20px;
+    background-color: rgb(30, 30, 50);
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.5s;
+}
+
+form:hover {
+    background-color: rgb(40, 40, 60);
+}
+
 label {
     margin-bottom: 8px;
+    color: rgb(222, 222, 222)
 }
 
 input {
+    padding: 8px;
+    margin-bottom: 16px;
+}
+
+textarea {
     padding: 8px;
     margin-bottom: 16px;
 }
@@ -48,4 +62,22 @@ button:active {
 
 #signIn:hover, #tipForm:hover {
     text-decoration: underline;
+}
+
+.Nav {
+    padding-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.checkBoxes {
+    display: inline;
+}
+
+h1 {
+    color:white;
+}
+
+button {
+    margin-top: 20px;
 }

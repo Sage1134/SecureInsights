@@ -13,6 +13,11 @@ body {
     padding: 50px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+    transition: background-color 0.5s;
+}
+
+.container:hover {
+    background-color: rgb(222, 222, 222);
 }
 
 #headerTitle {
@@ -44,6 +49,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     transition: opacity 0.2s;
+    margin-bottom: 10px;
 }
 
 button:hover {

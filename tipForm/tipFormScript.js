@@ -1,0 +1,40 @@
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('crimeForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        submit(event);
+    });
+});
+
+function submit(event) {
+    event.preventDefault();
+
+    const incidentType = document.getElementById("incidentType").value;
+    const dateAndTime = document.getElementById("dateTime").value;
+    const location = document.getElementById("location").value;
+    const description = document.getElementById("description").value;
+    const otherDetails = document.getElementById("otherDetails").value;
+    const contactInfo = document.getElementById("userContact").value;
+    const anonymous = document.getElementById("anonymity").value;
+    const accuracy = document.getElementById("confirmation").value;
+    const consent = document.getElementById("consent").value;
+    
+    const data = {
+        incidentType: incidentType,
+        dateAndTime: dateAndTime,
+        location: location,
+        description: description,
+        otherDetails: otherDetails,
+        contactInfo: contactInfo,
+        anonymous: anonymous,
+        accuracy: accuracy,
+        consent: consent
+    };
+
+    const socket = new WebSocket('ws://10.0.0.138:1134')
+
+    socket.onopen = function (event) {
+        socket.send("Submission")
+        socket.send(JSON.stringify(data));
+        alert ("sent")
+    };
+}

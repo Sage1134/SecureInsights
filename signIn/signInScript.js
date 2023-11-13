@@ -21,6 +21,9 @@ function signIn(event) {
             alert("Login Fail")
         }
 
+        socket.close(1000, "Closing Connection");
+        document.getElementById('username').value = "";
+        document.getElementById('password').value = "";
     };
 }
 

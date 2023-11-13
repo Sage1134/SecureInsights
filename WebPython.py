@@ -101,6 +101,8 @@ async def newClientConnected(client_socket):
             await register(client_socket)
         elif connectionPurpose == "SignIn":
             await signIn(client_socket)
+        elif connectionPurpose == "Submission":
+            await submission(client_socket)
     except:
         pass
 
@@ -146,6 +148,18 @@ async def signIn(client_socket):
         pass
     finally:
         connectedClients.remove(client_socket)
+
+async def submission(client_socket):
+    try:
+        data = await client_socket.recv()
+        data = json.loads(data)
+        print(data)
+
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
 
 async def startServer():
     print("Server Started")

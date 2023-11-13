@@ -19,6 +19,10 @@ function register(event) {
             socket.close(1000, "Closing Connection");
         };
 
+        document.getElementById("username").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("confirm").value = "";
+
     }
     else {
         alert("Passwords do not match!")
