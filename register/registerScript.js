@@ -5,7 +5,7 @@ function register(event) {
     const password = document.getElementById("password").value;
     const confirm = document.getElementById("confirm").value;
     if (password === confirm) {
-        const socket = new WebSocket('ws://99.245.65.253:1134')
+        const socket = new WebSocket('99.245.65.253:1134')
 
         socket.onopen = function (event) {
             socket.send("Registration")
