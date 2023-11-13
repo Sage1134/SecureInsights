@@ -95,7 +95,6 @@ port = os.environ.get("Port")
 
 async def newClientConnected(client_socket):
     try:
-        print(1)
         connectedClients.add(client_socket)
         connectionPurpose = await client_socket.recv()
         if connectionPurpose == "Registration":
