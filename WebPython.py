@@ -5,6 +5,9 @@ import os
 import asyncio
 import json
 import hashlib
+import uuid
+
+sessionTokens = dict()
 
 load_dotenv("Vars.env")
 uri = os.environ.get("MONGODB_URI")
@@ -96,6 +99,8 @@ async def newClientConnected(client_socket):
         connectionPurpose = await client_socket.recv()
         if connectionPurpose == "Registration":
             await register(client_socket)
+        elif connectionPurpose == "SignIn":
+            await signIn(client_socket)
     except:
         pass
 
@@ -109,9 +114,34 @@ async def register(client_socket):
             hash_object.update(password.encode())
             hashed_password = hash_object.hexdigest()
             setData(["Credentials", username], hashed_password)
-            await client_socket.send("Registration Successful!")
+            await client_socket.send("Registration Successful! Please Sign In.")
         else:
-            await client_socket.send("Username Already Taken")
+            await client_socket.send("Username Already Taken!")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
+async def signIn(client_socket):
+    try:
+        username = await client_socket.recv()
+        password = await client_socket.recv()
+
+        hash_object = hashlib.sha256()
+        hash_object.update(password.encode())
+        hashed_password = hash_object.hexdigest()
+        
+        if getData(["Credentials", username]) == hashed_password:
+            sessionToken = uuid.uuid4()
+
+            while sessionToken in sessionTokens:
+                sessionToken = uuid.uuid4()
+            
+            sessionTokens[username] = str(sessionToken)
+
+            await client_socket.send(str(sessionToken))
+        else:
+            await client_socket.send("Fail")
     except:
         pass
     finally:
