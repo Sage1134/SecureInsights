@@ -154,7 +154,6 @@ async def submission(client_socket):
         data = await client_socket.recv()
         data = json.loads(data)
         print(data)
-
     except:
         pass
     finally:
