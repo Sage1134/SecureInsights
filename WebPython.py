@@ -153,7 +153,15 @@ async def submission(client_socket):
     try:
         data = await client_socket.recv()
         data = json.loads(data)
-        print(data)
+
+        caseID = str(uuid.uuid4())
+
+        while getData(["crimeTips", caseID]) != None:
+            caseID = uuid.uuid4()
+        
+        data["caseID"] = caseID
+
+        setData(["crimeTips", caseID], data)
 
     except:
         pass

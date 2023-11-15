@@ -17,6 +17,8 @@ function signIn(event) {
         if (event.data !== "Fail") {
             alert("Login Success")
             setLocalStorageItem("CrimeClusterSessionID", event.data)
+            console.log("Session ID")
+            console.log(event.data)
         }
         else {
             alert("Login Fail")
