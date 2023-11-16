@@ -6,8 +6,18 @@ import asyncio
 import json
 import hashlib
 import uuid
-
 sessionTokens = dict()
+
+async def addSessionToken(username, token):
+    sessionTokens[username] = token
+
+    async def expireToken():
+        await asyncio.sleep(30)
+        if username in sessionTokens.keys() and sessionTokens[username] == token:
+            del sessionTokens[username]
+
+    asyncio.create_task(expireToken())
+
 
 load_dotenv("Vars.env")
 uri = os.environ.get("MONGODB_URI")
@@ -138,14 +148,11 @@ async def signIn(client_socket):
         hashed_password = hash_object.hexdigest()
         
         if getData(["Credentials", username]) == hashed_password:
-            sessionToken = uuid.uuid4()
+            sessionToken = str(uuid.uuid4())
 
-            while sessionToken in sessionTokens:
-                sessionToken = uuid.uuid4()
-            
-            sessionTokens[username] = str(sessionToken)
+            await addSessionToken(username, sessionToken)
 
-            await client_socket.send(str(sessionToken))
+            await client_socket.send(sessionToken)
         else:
             await client_socket.send("Fail")
     except:
