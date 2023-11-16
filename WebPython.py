@@ -105,7 +105,7 @@ async def newClientConnected(client_socket):
             await submission(client_socket)
     except:
         pass
-
+    
 async def register(client_socket):
     try:
         username = await client_socket.recv()
