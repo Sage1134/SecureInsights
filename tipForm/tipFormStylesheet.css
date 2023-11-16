@@ -57,7 +57,7 @@ button:active {
 #signIn, #tipForm {
     color: #007BFF;
     text-decoration: none;
-    margin: 15px;
+    margin: 25px;
 }
 
 #signIn:hover, #tipForm:hover {
