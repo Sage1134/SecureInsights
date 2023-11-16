@@ -113,7 +113,7 @@ async def register(client_socket):
         department = await client_socket.recv()
 
         if getData(["Credentials", username]) == None:
-            if getData(["depIDs"]) != None:
+            if getData(["depIDs", department]) != None:
                 hash_object = hashlib.sha256()
                 hash_object.update(password.encode())
                 hashed_password = hash_object.hexdigest()
