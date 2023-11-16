@@ -110,13 +110,17 @@ async def register(client_socket):
     try:
         username = await client_socket.recv()
         password = await client_socket.recv()
+        department = await client_socket.recv()
 
         if getData(["Credentials", username]) == None:
-            hash_object = hashlib.sha256()
-            hash_object.update(password.encode())
-            hashed_password = hash_object.hexdigest()
-            setData(["Credentials", username], hashed_password)
-            await client_socket.send("Registration Successful! Please Sign In.")
+            if getData(["depIDs"]) != None:
+                hash_object = hashlib.sha256()
+                hash_object.update(password.encode())
+                hashed_password = hash_object.hexdigest()
+                setData(["Credentials", username], hashed_password)
+                await client_socket.send("Registration Successful! Please Sign In.")
+            else:
+                await client_socket.send("Invalid Department ID!")
         else:
             await client_socket.send("Username Already Taken!")
     except:
