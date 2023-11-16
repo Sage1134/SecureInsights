@@ -15,16 +15,23 @@ function signIn(event) {
 
     socket.onmessage = function(event) {
         if (event.data !== "Fail") {
-            alert("Login Success")
-            setLocalStorageItem("CrimeClusterSessionID", event.data)
-            console.log("Session ID")
-            console.log(event.data)
+            if (String(event.data).startsWith("redirect")) {
+                socket.close(1000, "Closing Connection");
+
+                url = String(event.data).split("|")[1]
+                window.location.replace(url);
+            }
+            else {
+                alert("Login Successful!")
+                setLocalStorageItem("CrimeClusterSessionID", event.data)
+                setLocalStorageItem("CrimeClusterUsername", username)
+            }
         }
         else {
             alert("Login Fail")
+            socket.close(1000, "Closing Connection");
         }
 
-        socket.close(1000, "Closing Connection");
         document.getElementById('username').value = "";
         document.getElementById('password').value = "";
     };

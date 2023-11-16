@@ -12,12 +12,11 @@ async def addSessionToken(username, token):
     sessionTokens[username] = token
 
     async def expireToken():
-        await asyncio.sleep(30)
+        await asyncio.sleep(10)
         if username in sessionTokens.keys() and sessionTokens[username] == token:
             del sessionTokens[username]
 
     asyncio.create_task(expireToken())
-
 
 load_dotenv("Vars.env")
 uri = os.environ.get("MONGODB_URI")
@@ -113,6 +112,8 @@ async def newClientConnected(client_socket):
             await signIn(client_socket)
         elif connectionPurpose == "Submission":
             await submission(client_socket)
+        elif connectionPurpose == "Test":
+            await test(client_socket)
     except:
         pass
     
@@ -153,6 +154,7 @@ async def signIn(client_socket):
             await addSessionToken(username, sessionToken)
 
             await client_socket.send(sessionToken)
+            await client_socket.send("redirect|../innerPage/innerPage.html")
         else:
             await client_socket.send("Fail")
     except:
@@ -179,6 +181,23 @@ async def submission(client_socket):
     finally:
         connectedClients.remove(client_socket)
 
+async def test(client_socket):
+    try:
+        sessionID = await client_socket.recv()
+        username = await client_socket.recv()
+        if username in sessionTokens.keys():
+            if sessionTokens[username] == sessionID:
+                data = getData(["crimeTips"])
+                data = json.dumps(data)
+                await client_socket.send(data)
+            else:
+                await client_socket.send("Session Invalid Or Expired")
+        else:
+            await client_socket.send("Session Invalid Or Expired")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
 
 async def startServer():
     print("Server Started")
