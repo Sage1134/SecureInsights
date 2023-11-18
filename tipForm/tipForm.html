@@ -7,51 +7,44 @@
     </head>
     <body>
 
-        <h1>Submit A Tip</h1>
-
-        <form id="crimeForm">
-            <label>Type of Incident:</label>
-            <input type="text" id="incidentType" required>
-
-            <label>Date and Time:</label>
-            <input type="datetime-local" id="dateTime" required>
-        
-            <label>Location:</label>
-            <input type="text" id="location" required>
-        
-            <label>Description:</label>
-            <textarea id="description" rows="4" required></textarea>
-        
-            <label>Other Details:</label>
-            <textarea id="otherDetails" rows="4"></textarea>
-
-            <label>Your Contact (optional):</label>
-            <input type="text" id="userContact">
+        <h1 id="headerTitle">Crime Tipper</h1>
+        <div class="container">
+            <h1>Submit A Tip</h1>
+            <form id="crimeForm">
+                <label>Type of Incident</label>
+                <input type="text" id="incidentType" required>
+    
+                <label>Date and Time</label>
+                <input type="datetime-local" id="dateTime" required>
             
-            <div class="checkBoxes">
-                <br>
-                <label>Submit Anonymously</label>
-                <input type="checkbox" id="anonymity">
-
-                <br>
-
-                <label>I confirm the accuracy of this information</label>
-                <input type="checkbox" id="confirmation" required>
+                <label>Location</label>
+                <input type="text" id="location" required>
+            
+                <label>Description</label>
+                <input type=text id="description" required></textarea>
+    
+                <label>Your Contact (Optional)</label>
+                <input type="text" id="userContact">
                 
-                <br>
+                <div class="checkBoxes">
+                    <br>
+                    <label>Submit Anonymously</label>
+                    <input type="checkbox" id="anonymity">
+    
+                    <br>
+                    <label>I confirm the accuracy of this information</label>
+                    <input type="checkbox" id="confirmation" required>
+                    <br>
 
-                <label>I consent to share this information with law enforcement</label>
-                <input type="checkbox" id="consent" required>
-            </div>
-        
-            <button type="submit" id="submission">Submit</button>
-
+                </div>
+            
+                <button type="submit" id="submission">Submit</button>
+            </form>
             <div class="Nav">
                 <a href="../signIn/signIn.html" id="signIn">Sign In</a>
                 <a href="../register/register.html" id="tipForm">Register</a>
             </div>
-        </form>
-
+        </div>
         <script type="text/javascript" src="tipFormScript.js"></script>
 
     </body>
