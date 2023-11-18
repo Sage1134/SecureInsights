@@ -36,6 +36,6 @@ function submit(event) {
     socket.onopen = function (event) {
         socket.send("Submission")
         socket.send(JSON.stringify(data));
-        alert ("sent")
+        alert ("Tip Submitted. Thank You!")
     };
 }
