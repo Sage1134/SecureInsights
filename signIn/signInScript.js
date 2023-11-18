@@ -22,7 +22,6 @@ function signIn(event) {
                 window.location.replace(url);
             }
             else {
-                alert("Login Successful!")
                 setLocalStorageItem("CrimeClusterSessionID", event.data)
                 setLocalStorageItem("CrimeClusterUsername", username)
             }
