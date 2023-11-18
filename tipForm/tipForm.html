@@ -11,20 +11,15 @@
         <div class="container">
             <h1>Submit A Tip</h1>
             <form id="crimeForm">
-                <label>Type of Incident</label>
-                <input type="text" id="incidentType" required>
+                <input type="text" id="incidentType" placeholder="Type of incident" required>
     
-                <label>Date and Time</label>
                 <input type="datetime-local" id="dateTime" required>
             
-                <label>Location</label>
-                <input type="text" id="location" required>
+                <input type="text" id="location" placeholder="Location of incident" required>
             
-                <label>Description</label>
-                <input type=text id="description" required></textarea>
-    
-                <label>Your Contact (Optional)</label>
-                <input type="text" id="userContact">
+                <input type=text id="description" placeholder="Incident description" required></textarea>
+
+                <input type="text" id="userContact" placeholder="Contact information (optional)">
                 
                 <div class="checkBoxes">
                     <br>
@@ -42,7 +37,7 @@
             </form>
             <div class="Nav">
                 <a href="../signIn/signIn.html" id="signIn">Sign In</a>
-                <a href="../register/register.html" id="tipForm">Register</a>
+                <a href="../register/register.html" id="register">Register</a>
             </div>
         </div>
         <script type="text/javascript" src="tipFormScript.js"></script>

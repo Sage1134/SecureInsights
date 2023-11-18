@@ -38,10 +38,6 @@ form {
     flex-direction: column;
 }
 
-label {
-    margin-bottom: 8px;
-}
-
 input {
     height: 32px;
     width: 256px;
@@ -71,7 +67,7 @@ button:active {
 #signIn, #tipForm {
     color: #007BFF;
     text-decoration: none;
-    margin: 33px;
+    margin: 31px;
 }
 
 #signIn:hover, #tipForm:hover {

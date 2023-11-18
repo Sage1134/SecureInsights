@@ -39,13 +39,9 @@ form {
     font-size: 55px;
 }
 
-label {
-    margin-bottom: 4px;
-}
-
 input {
     padding: 8px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     border-radius: 4px;
 }
 
@@ -68,13 +64,13 @@ button:active {
     opacity: 0.6;
 }
 
-#signIn, #tipForm {
+#signIn, #register {
     color: #007BFF;
     text-decoration: none;
-    margin: 25px;
+    margin: 30px;
 }
 
-#signIn:hover, #tipForm:hover {
+#signIn:hover, #register:hover {
     text-decoration: underline;
 }
 

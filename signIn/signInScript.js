@@ -28,7 +28,7 @@ function signIn(event) {
             }
         }
         else {
-            alert("Login Fail")
+            alert("Invalid Username Or Password!")
             socket.close(1000, "Closing Connection");
         }
 
