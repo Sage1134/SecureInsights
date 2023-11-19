@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
 body {
     background-image: url("../images/externalBackground.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: rubik, sans-serif;
     background-color: rgb(255, 255, 255);
     margin: 0;
     display: flex;
@@ -35,8 +37,8 @@ form {
 }
 
 input {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 36px;
+    padding-right: 20px;
     height: 32px;
     width: 256px;
     margin-bottom: 16px;
@@ -46,18 +48,29 @@ input {
     border-color: rgb(170, 170, 170);
 }
 
-input::after {
-    content: "$";
+#username {
+    background-image: url("../images/usernameIcon.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+
+#password {
+    background-image: url("../images/passwordIcon.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px;
 }
 
 h1 {
     color: rgb(244, 244, 244);
     text-align: center;
+    font-size: 250%;
 }
 
 button {
-    background-color: rgb(180, 60, 70);
-    border-color: rgb(140, 40, 45);
+    background-color: rgb(190, 70, 80);
+    border-color: rgb(150, 40, 45);
     color: #fff;
     padding: 10px;
     border-style: solid;
@@ -77,12 +90,13 @@ button:active {
 }
 
 #register, #tipForm {
-    font-size: 85%;
-    color: rgb(255, 100, 120);
+    font-size: 90%;
+    color: rgb(255, 150, 170);
     text-decoration: none;
-    margin: 38px;
+    margin: 48px;
+    text-decoration: underline;
 }
 
 #register:hover, #tipForm:hover {
-    text-decoration: underline;
+    color: rgb(255, 220, 220);
 }

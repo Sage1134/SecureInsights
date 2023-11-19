@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
 body {
     background-image: url("../images/externalBackground.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: rubik, sans-serif;
     background-color: rgb(255, 255, 255);
     margin: 0;
     display: flex;
@@ -13,18 +15,20 @@ body {
 }
 
 .container {
-    backdrop-filter: blur(8px) saturate(150%);
+    backdrop-filter: blur(12px) saturate(150%);
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 12px;
-    border: 1px solid rgba(20, 20, 20, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     padding: 80px;
-    border-radius: 8px;
+    padding-bottom: 100px;
+    padding-top: 100px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    transition: background-color 1s;
+    transition: box-shadow 1s;
 }
 
 .container:hover {
-    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 30px black;
+    
 }
 
 form {
@@ -33,22 +37,62 @@ form {
 }
 
 input {
+    padding-left: 36px;
+    padding-right: 20px;
     height: 32px;
     width: 256px;
     margin-bottom: 16px;
-    border-radius: 4px;
-    border-color: rgb(244, 244, 244);
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(170, 170, 170);
+}
+
+#username {
+    background-image: url("../images/usernameIcon.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+
+#password {
+    background-image: url("../images/passwordIcon.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+
+#confirm {
+    background-image: url("../images/passwordIcon.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+
+#departmentID {
+    background-image: url("../images/departmentIcon.png");
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: 10px;
+}
+
+h1 {
+    color: rgb(244, 244, 244);
+    text-align: center;
+    font-size: 250%;
 }
 
 button {
-    background-color: #3195ff;
+    background-color: rgb(190, 70, 80);
+    border-color: rgb(150, 40, 45);
     color: #fff;
     padding: 10px;
-    border-radius: 4px;
-    border-color: #3195ff;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
     cursor: pointer;
     transition: opacity 0.2s;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 button:hover {
@@ -60,11 +104,13 @@ button:active {
 }
 
 #signIn, #tipForm {
-    color: #71b6ff;
+    font-size: 90%;
+    color: rgb(255, 150, 170);
     text-decoration: none;
-    margin: 31px;
+    margin: 48px;
+    text-decoration: underline;
 }
 
 #signIn:hover, #tipForm:hover {
-    text-decoration: underline;
+    color: rgb(255, 220, 220);
 }
