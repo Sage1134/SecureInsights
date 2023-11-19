@@ -13,10 +13,10 @@ body {
 }
 
 .container {
-    backdrop-filter: blur(8px) saturate(150%);
+    backdrop-filter: blur(12px) saturate(150%);
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 12px;
-    border: 2px solid rgba(60, 60, 60, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     padding: 80px;
     padding-bottom: 100px;
     padding-top: 100px;
@@ -25,16 +25,8 @@ body {
 }
 
 .container:hover {
-    box-shadow: 0 0 35px black;
+    box-shadow: 0 0 30px black;
     
-}
-
-#headerTitle {
-    color: rgb(160, 200, 180);
-    position: absolute;
-    text-align: center;
-    top: 1px;
-    font-size: 55px;
 }
 
 form {
@@ -43,21 +35,15 @@ form {
 }
 
 input {
-    background: transparent;
     padding-left: 10px;
     padding-right: 10px;
     height: 32px;
     width: 256px;
     margin-bottom: 16px;
-    border-radius: 40px;
+    border-radius: 8px;
     border-width: 1px;
     border-style: solid;
-    border-color: white;
-    color: rgb(222, 222, 222);
-}
-
-input::placeholder {
-    color: rgb(170, 170, 170)
+    border-color: rgb(170, 170, 170);
 }
 
 input::after {
@@ -65,16 +51,18 @@ input::after {
 }
 
 h1 {
-    color: rgb(40, 40, 40);
+    color: rgb(244, 244, 244);
     text-align: center;
 }
 
 button {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: rgb(180, 60, 70);
+    border-color: rgb(140, 40, 45);
+    color: #fff;
     padding: 10px;
-    border-style: none;
-    border-radius: 40px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
     cursor: pointer;
     transition: opacity 0.2s;
     margin-bottom: 20px;
@@ -90,7 +78,7 @@ button:active {
 
 #register, #tipForm {
     font-size: 85%;
-    color: rgb(200, 200, 255);
+    color: rgb(255, 100, 120);
     text-decoration: none;
     margin: 38px;
 }
