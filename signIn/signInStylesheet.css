@@ -42,23 +42,19 @@ form {
 }
 
 input {
-    padding-left: 10px;
-    padding-right: 10px;
-    border-style: solid;
-    border-color: rgb(170, 170, 170);
-    background: transparent;
     height: 32px;
     width: 256px;
     margin-bottom: 16px;
-    border-radius: 88px;
+    border-radius: 40px;
+    border-color: rgb(244, 244, 244);
 }
 
 button {
-    background-color: #3195ff;
+    background-color: #ffffff;
     color: #fff;
     padding: 10px;
+    border-style: none;
     border-radius: 40px;
-    border-color: #3195ff;
     cursor: pointer;
     transition: opacity 0.2s;
     margin-bottom: 20px;
