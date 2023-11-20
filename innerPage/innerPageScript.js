@@ -1,7 +1,8 @@
 function test(event) {
     const textBox = document.getElementById('textBox');
     const sessionID = getLocalStorageItem("CrimeClusterSessionID");
-    const username = getLocalStorageItem("CrimeClusterUsername")
+    const username = getLocalStorageItem("CrimeClusterUsername");
+    const caseID = document.getElementById("caseID");
 
     const isLocalConnection = window.location.hostname === '10.0.0.138';
     const socket = new WebSocket(isLocalConnection ? 'ws://10.0.0.138:1134' : 'ws://99.245.65.253:1134');
@@ -10,6 +11,7 @@ function test(event) {
         socket.send("Test")
         socket.send(sessionID)
         socket.send(username)
+        socket.send(caseID.value)
     };
 
     socket.onmessage = function(event) {

@@ -185,9 +185,11 @@ async def test(client_socket):
     try:
         sessionID = await client_socket.recv()
         username = await client_socket.recv()
+        caseID = await client_socket.recv()
+
         if username in sessionTokens.keys():
             if sessionTokens[username] == sessionID:
-                data = getData(["crimeTips"])
+                data = getData(["crimeTips", caseID])
                 data = json.dumps(data)
                 await client_socket.send(data)
             else:
