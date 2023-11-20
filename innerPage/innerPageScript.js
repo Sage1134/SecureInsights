@@ -38,22 +38,24 @@ function refreshData() {
         else {
             var data = JSON.parse(event.data);
             for (key in data) {
-                caseData = data[key];
-    
-                var newButton = document.createElement("button");
-                newButton.style.paddingTop = "0.5vh";
-                newButton.style.paddingBottom = "0.5vh"
-                newButton.style.width = "10vw";
-                newButton.innerHTML = caseData["incidentType"];
-                newButton.id = caseData["caseID"];
-                newButton.addEventListener("click", function() {
-                    displayInformation(newButton.id);
-                });
-    
-                if (caseData["caseStatus"] == "open") {
-                    openCases.appendChild(newButton);
-                }
-            }
+                (function() {
+                    var caseData = data[key];
+            
+                    var newButton = document.createElement("button");
+                    newButton.style.paddingTop = "0.5vh";
+                    newButton.style.paddingBottom = "0.5vh";
+                    newButton.style.width = "10vw";
+                    newButton.innerHTML = caseData["incidentType"];
+                    newButton.id = caseData["caseID"];
+                    newButton.addEventListener("click", function() {
+                        displayInformation(newButton.id);
+                    });
+            
+                    if (caseData["caseStatus"] == "open") {
+                        openCases.appendChild(newButton);
+                    }
+                })();
+            }            
         }
     };
 }
