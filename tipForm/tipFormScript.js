@@ -12,22 +12,16 @@ function submit(event) {
     const dateAndTime = document.getElementById("dateTime").value;
     const location = document.getElementById("location").value;
     const description = document.getElementById("description").value;
-    const otherDetails = document.getElementById("otherDetails").value;
     const contactInfo = document.getElementById("userContact").value;
     const anonymous = document.getElementById("anonymity").value;
-    const accuracy = document.getElementById("confirmation").value;
-    const consent = document.getElementById("consent").value;
     
     const data = {
         incidentType: incidentType,
         dateAndTime: dateAndTime,
         location: location,
         description: description,
-        otherDetails: otherDetails,
         contactInfo: contactInfo,
         anonymous: anonymous,
-        accuracy: accuracy,
-        consent: consent
     };
 
     const isLocalConnection = window.location.hostname === '10.0.0.138';

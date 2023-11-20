@@ -1,35 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
 body {
-    background-image: url("../images/internalBackground.png");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: rgb(255, 255, 255);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    font-family: rubik, sans-serif;
+    background-color: rgb(0, 0, 0);
+    margin: 0px;
 }
-
-#headerTitle {
-    color: rgb(180, 100, 180);
-    position: absolute;
-    text-align: center;
-    top: 1px;
-    font-size: 55px;
-}
-
-#card {
-    padding: 150px;
-    backdrop-filter: blur(8px) saturate(150%);
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    border: 1px solid rgba(20, 20, 20, 0.8);
-}
-
 
 textarea {
-    width: 400px;
-    height: 300px;
+    resize: none;
+    overflow-y: auto;
+}
+
+#container {
+    display: flex;
+}
+
+#caseInfo {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ddd;
+    text-align: center;
+    margin: 8vh;
+    margin-top: 12vh;
+}
+
+#sidebar {
+    background-color: white;
+    height: 100vh;
+    width: 15vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#openCases, #closedCases {
+    width: 12vw;
+    height: 30vh;
+    margin: 20px;
+    margin-bottom: 10px;
+    background-color: gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    
+}
+
+
+label {
+    display: block;
 }

@@ -6,11 +6,58 @@
         <link rel="Stylesheet" type="text/css" href="innerPageStylesheet.css">
     </head>
     <body>
-        <h1 id="headerTitle">Guard Alert</h1>
-        <div id="card">
-            <textarea id="textBox"></textarea>
-            <input type="text" id="caseID"></textarea>
-            <button type="button" onclick="test()">Test</button>
+        <div id="container">
+            <div id="sidebar">
+                <label>Open Cases</label>
+                <div id="openCases">
+                    <p>Wow Such Empty</p>
+                </div>
+
+                <label>Closed Cases</label>
+                <div id="closedCases">
+                    <p>Wow Such Empty</p>
+                </div>
+
+                <button>Close Case</button>
+                <button>Log Out</button>
+            </div>
+
+            <div id="caseInfo">
+                <div>
+                    <label>Incident Type</label>
+                    <textarea readonly id="incidentType"></textarea>
+                </div>
+
+                <div>
+                    <label>Case ID</label>
+                    <textarea readonly id="caseID"></textarea>
+                </div>
+
+                <div>
+                    <label>Time Of Incident</label>
+                    <textarea readonly id="time"></textarea>
+                </div>
+
+                <div>
+                    <label>Location Of Incident</label>
+                    <textarea readonly id="location"></textarea>
+                </div>
+
+                <div>
+                    <label>Contact Information</label>
+                    <textarea readonly id="contact"></textarea>
+                </div>
+
+                <div>
+                    <label>Description Of Incident</label>
+                    <textarea readonly id="description"></textarea>
+                </div>
+
+                <div>
+                    <label>Case Status</label>
+                    <textarea readonly id="status"></textarea>
+                </div>
+            </div>
         </div>
         <script type="text/javascript" src="innerPageScript.js"></script>
     </body>

@@ -22,8 +22,8 @@ function signIn(event) {
                 window.location.replace(url);
             }
             else {
-                setLocalStorageItem("CrimeClusterSessionID", event.data)
-                setLocalStorageItem("CrimeClusterUsername", username)
+                setLocalStorageItem("sessionID", event.data)
+                setLocalStorageItem("username", username)
             }
         }
         else {

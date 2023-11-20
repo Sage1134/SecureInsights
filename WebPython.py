@@ -12,7 +12,7 @@ async def addSessionToken(username, token):
     sessionTokens[username] = token
 
     async def expireToken():
-        await asyncio.sleep(10)
+        await asyncio.sleep(86400)
         if username in sessionTokens.keys() and sessionTokens[username] == token:
             del sessionTokens[username]
 
@@ -112,8 +112,10 @@ async def newClientConnected(client_socket):
             await signIn(client_socket)
         elif connectionPurpose == "Submission":
             await submission(client_socket)
-        elif connectionPurpose == "Test":
-            await test(client_socket)
+        elif connectionPurpose == "Refresh":
+            await refresh(client_socket)
+        elif connectionPurpose == "getInfo":
+            await getInfo(client_socket)
     except:
         pass
     
@@ -174,6 +176,8 @@ async def submission(client_socket):
         
         data["caseID"] = caseID
 
+        data["caseStatus"] = "open"
+
         setData(["crimeTips", caseID], data)
 
     except:
@@ -181,7 +185,26 @@ async def submission(client_socket):
     finally:
         connectedClients.remove(client_socket)
 
-async def test(client_socket):
+async def refresh(client_socket):
+    try:
+        sessionID = await client_socket.recv()
+        username = await client_socket.recv()
+
+        if username in sessionTokens.keys():
+            if sessionTokens[username] == sessionID:
+                data = getData(["crimeTips"])
+                data = json.dumps(data)
+                await client_socket.send(data)
+            else:
+                await client_socket.send("Session Invalid Or Expired")
+        else:
+            await client_socket.send("Session Invalid Or Expired")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
+async def getInfo(client_socket):
     try:
         sessionID = await client_socket.recv()
         username = await client_socket.recv()
