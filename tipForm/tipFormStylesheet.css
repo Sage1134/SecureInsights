@@ -101,3 +101,17 @@ label {
 button {
     margin-top: 20px;
 }
+
+#logo {
+    height: 10xh;
+    width: 10vh;
+    position: absolute;
+    top: 4vh;
+    opacity: 0.8;
+    transition: box-shadow 2s, opacity 2s;
+}
+
+#logo:hover {
+    box-shadow: 0 0 300px white;
+    opacity: 0;
+}
