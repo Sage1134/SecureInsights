@@ -31,5 +31,6 @@ function submit(event) {
         socket.send("Submission")
         socket.send(JSON.stringify(data));
         alert ("Tip Submitted. Thank You!")
+        socket.close(1000, "Closing Connection");
     };
 }

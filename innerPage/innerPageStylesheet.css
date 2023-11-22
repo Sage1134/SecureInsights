@@ -1,14 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 
 body {
+    background-size: cover;
     font-family: rubik, sans-serif;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(60, 60, 220);
     margin: 0px;
 }
 
 textarea {
     resize: none;
     overflow-y: auto;
+    border-radius: 10px;
+    padding: 5px;
 }
 
 #container {
@@ -17,15 +20,18 @@ textarea {
 
 #caseInfo {
     flex-grow: 1;
+    justify-content: space-evenly;
+    align-content: flex-start;
     padding: 20px;
     background-color: #ddd;
     text-align: center;
-    margin: 8vh;
-    margin-top: 12vh;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #sidebar {
-    background-color: white;
+    position: inherit;
+    background-color: rgb(50, 50, 150);
     height: 100vh;
     width: 15vw;
     display: flex;
@@ -33,21 +39,133 @@ textarea {
     align-items: center;
 }
 
+
+  
 #openCases, #closedCases {
     width: 12vw;
     height: 30vh;
-    margin: 20px;
     margin-bottom: 10px;
-    background-color: gray;
+    background-color: rgb(222, 222, 222);
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
     overflow-x: hidden;
-    
+    border-radius: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#openCases::-webkit-scrollbar {
+    width: 5px;
+}
+
+#openCases::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(170, 170, 170);
+}
+
+#openCases::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(144, 144, 144);
 }
 
 
 label {
     display: block;
+    font-size: 150%;
+    padding-top: 2vh;
+    padding-bottom: 1vh;
+}
+
+#incidentType {
+    flex-grow: 1;
+    width: 25vw;
+    height: 4vh;
+}
+
+#caseID {
+    flex-grow: 1;
+    width: 25vw;
+    height: 4vh;
+}
+
+#time {
+    flex-grow: 1;
+    width: 25vw;
+    height: 4vh;
+}
+
+#location {
+    flex-grow: 1;
+    width: 20vw;
+    height: 4vh;
+}
+
+#contact {
+    flex-grow: 1;
+    width: 20vw;
+    height: 4vh;
+}
+
+#description {
+    flex-grow: 1;
+    width: 60vw;
+    height: 40vh;
+}
+
+#status {
+    flex-grow: 1;
+    width: 20vw;
+    height: 4vh;
+}
+
+#toggleCase, #logout {
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    border-style: none;
+    width: 10vw;
+}
+
+#rightContainer {
+    background-color: rgb(244, 244, 244);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#h1 {
+    margin: 0px;
+}
+
+#buttonContainer {
+    position: absolute;
+    bottom: 2vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#sideBarLabel {
+    color: white;
+    font-weight: 900;
+}
+
+button {
+    background: none;
+    font-family: monospace;
+    border-style: none;
+    font-weight: 900;
+}
+
+button:hover {
+    color: rgb(120, 120, 120);
+}
+
+button:active {
+    color: rgb(160, 160, 160);
+}
+
+#logout, #toggleCase {
+    background-color: #ddd;
 }

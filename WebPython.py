@@ -116,9 +116,60 @@ async def newClientConnected(client_socket):
             await refresh(client_socket)
         elif connectionPurpose == "getInfo":
             await getInfo(client_socket)
+        elif connectionPurpose == "logout":
+            await logout(client_socket)
+        elif connectionPurpose == "toggle":
+            await toggle(client_socket)
     except:
         pass
-    
+
+async def toggle(client_socket):
+    try:
+        sessionID = await client_socket.recv()
+        username = await client_socket.recv()
+        toDo = await client_socket.recv()
+        caseID = await client_socket.recv()
+
+        if username in sessionTokens.keys():
+            if sessionTokens[username] == sessionID:
+                case = getData(["crimeTips", caseID])
+                case = dict(case)
+                if toDo == "Close Case":
+                    case["caseStatus"] = "closed"
+                else:
+                    case["caseStatus"] = "open"
+                    
+                setData(["crimeTips", caseID], case)
+                await client_socket.send("Success")
+            else:
+                await client_socket.send("Session Invalid Or Expired")
+        else:
+            await client_socket.send("Session Invalid Or Expired")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
+async def logout(client_socket):
+    try:
+        sessionID = await client_socket.recv()
+        username = await client_socket.recv()
+
+        if username in sessionTokens.keys():
+            if sessionTokens[username] == sessionID:
+                del sessionTokens[username]
+                await client_socket.send("Logout Success")
+            else:
+                await client_socket.send("Session Invalid Or Expired")
+        else:
+            await client_socket.send("Session Invalid Or Expired")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
+
+
 async def register(client_socket):
     try:
         username = await client_socket.recv()

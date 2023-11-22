@@ -8,54 +8,59 @@
     <body>
         <div id="container">
             <div id="sidebar">
-                <label>Open Cases</label>
+                <label id="sideBarLabel">Open Cases</label>
                 <div id="openCases">
                     <p>Wow Such Empty</p>
                 </div>
 
-                <label>Closed Cases</label>
+                <label id="sideBarLabel">Closed Cases</label>
                 <div id="closedCases">
                     <p>Wow Such Empty</p>
                 </div>
 
-                <button>Close Case</button>
-                <button>Log Out</button>
+                <div id="buttonContainer">
+                    <button id="toggleCase" onclick="toggleCaseStatus()">Toggle Case</button>
+                    <button id="logout" onclick="logout()">Log Out</button>
+                </div>
             </div>
 
-            <div id="caseInfo">
-                <div>
-                    <label>Incident Type</label>
-                    <textarea readonly id="incidentType"></textarea>
-                </div>
+            <div id="rightContainer">
+                <h1 id="welcome">Welcome Placeholder</h1>
+                <div id="caseInfo">
+                    <div>
+                        <label>Incident Type</label>
+                        <textarea readonly id="incidentType"></textarea>
+                    </div>
+    
+                    <div>
+                        <label>Case ID</label>
+                        <textarea readonly id="caseID"></textarea>
+                    </div>
+                    
+                    <div>
+                        <label>Time Of Incident</label>
+                        <textarea readonly id="time"></textarea>
+                    </div>
+    
+                    <div>
+                        <label>Location Of Incident</label>
+                        <textarea readonly id="location"></textarea>
+                    </div>
+    
+                    <div>
+                        <label>Contact Information</label>
+                        <textarea readonly id="contact"></textarea>
+                    </div>
 
-                <div>
-                    <label>Case ID</label>
-                    <textarea readonly id="caseID"></textarea>
-                </div>
+                    <div>
+                        <label>Case Status</label>
+                        <textarea readonly id="status"></textarea>
+                    </div>
 
-                <div>
-                    <label>Time Of Incident</label>
-                    <textarea readonly id="time"></textarea>
-                </div>
-
-                <div>
-                    <label>Location Of Incident</label>
-                    <textarea readonly id="location"></textarea>
-                </div>
-
-                <div>
-                    <label>Contact Information</label>
-                    <textarea readonly id="contact"></textarea>
-                </div>
-
-                <div>
-                    <label>Description Of Incident</label>
-                    <textarea readonly id="description"></textarea>
-                </div>
-
-                <div>
-                    <label>Case Status</label>
-                    <textarea readonly id="status"></textarea>
+                    <div>
+                        <label>Description Of Incident</label>
+                        <textarea readonly id="description"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
