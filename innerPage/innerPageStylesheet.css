@@ -3,7 +3,6 @@
 body {
     background-size: cover;
     font-family: rubik, sans-serif;
-    background-color: rgb(60, 60, 150);
     margin: 0px;
 }
 
@@ -28,15 +27,13 @@ textarea {
     display: flex;
     flex-wrap: wrap;
     margin: 20px;
+    margin-left: 16vw;
     border-radius: 20px;
-    border-style: solid;
-    background-color: rgb(222, 222, 222);
-    border-color: rgb(150, 150, 150);
-    box-shadow: 0 0 15px rgb(0, 0, 0);
+    background-color: rgb(210, 210, 210);
 }
 
 #sidebar {
-    position: inherit;
+    position: fixed;
     background-color: rgb(60, 60, 150);
     height: 100vh;
     width: 15vw;
@@ -77,53 +74,60 @@ textarea {
     background-color: rgb(144, 144, 144);
 }
 
-
 label {
     display: block;
     font-size: 150%;
     padding-top: 2vh;
     padding-bottom: 1vh;
+    margin-bottom: 10px;
 }
 
+#inputComp {
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 2vh;
+
+}
 #incidentType {
     flex-grow: 1;
-    width: 25vw;
+    width: 70vw;
     height: 4vh;
 }
 
 #caseID {
     flex-grow: 1;
-    width: 25vw;
+    width: 70vw;
     height: 4vh;
 }
 
 #time {
     flex-grow: 1;
-    width: 25vw;
+    width: 70vw;
     height: 4vh;
 }
 
 #location {
     flex-grow: 1;
-    width: 20vw;
+    width: 70vw;
     height: 4vh;
 }
 
 #contact {
     flex-grow: 1;
-    width: 20vw;
+    width: 70vw;
     height: 4vh;
 }
 
 #description {
     flex-grow: 1;
-    width: 60vw;
+    width: 70vw;
     height: 40vh;
 }
 
 #status {
     flex-grow: 1;
-    width: 20vw;
+    width: 70vw;
     height: 4vh;
 }
 
@@ -136,7 +140,7 @@ label {
 }
 
 #rightContainer {
-    background-color: rgb(244, 244, 244);
+    background-image: url("../images/innerBackground.jpeg");
     display: flex;
     align-items: center;
     flex-direction: column;
