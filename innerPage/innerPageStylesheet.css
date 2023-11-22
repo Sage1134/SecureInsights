@@ -3,7 +3,7 @@
 body {
     background-size: cover;
     font-family: rubik, sans-serif;
-    background-color: rgb(60, 60, 220);
+    background-color: rgb(60, 60, 150);
     margin: 0px;
 }
 
@@ -12,6 +12,7 @@ textarea {
     overflow-y: auto;
     border-radius: 10px;
     padding: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 #container {
@@ -23,15 +24,20 @@ textarea {
     justify-content: space-evenly;
     align-content: flex-start;
     padding: 20px;
-    background-color: #ddd;
     text-align: center;
     display: flex;
     flex-wrap: wrap;
+    margin: 20px;
+    border-radius: 20px;
+    border-style: solid;
+    background-color: rgb(222, 222, 222);
+    border-color: rgb(150, 150, 150);
+    box-shadow: 0 0 15px rgb(0, 0, 0);
 }
 
 #sidebar {
     position: inherit;
-    background-color: rgb(50, 50, 150);
+    background-color: rgb(60, 60, 150);
     height: 100vh;
     width: 15vw;
     display: flex;
@@ -40,7 +46,6 @@ textarea {
 }
 
 
-  
 #openCases, #closedCases {
     width: 12vw;
     height: 30vh;
@@ -54,6 +59,9 @@ textarea {
     border-radius: 10px;
     margin-left: 10px;
     margin-right: 10px;
+    border-style: solid;
+    border-color: rgb(110, 110, 110);
+    box-shadow: 0 0 10px rgb(30, 30, 30);
 }
 
 #openCases::-webkit-scrollbar {
@@ -134,10 +142,6 @@ label {
     flex-direction: column;
 }
 
-#h1 {
-    margin: 0px;
-}
-
 #buttonContainer {
     position: absolute;
     bottom: 2vh;
@@ -168,4 +172,9 @@ button:active {
 
 #logout, #toggleCase {
     background-color: #ddd;
+    border-color: rgb(150, 150, 150);
+    box-shadow: 0 0 8px rgb(0, 0, 0);
+    border-width: 3px;
+    border-style: solid;
+    height: 6vh;
 }
