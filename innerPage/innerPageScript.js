@@ -53,6 +53,11 @@ function refreshData() {
                     newButton.style.width = "10vw";
                     newButton.innerHTML = caseData["incidentType"];
                     newButton.id = caseData["caseID"];
+
+                    if (caseData["caseID"] == getLocalStorageItem("caseID")) {
+                        newButton.style.color = "rgb(50, 50, 160)";
+                    }
+
                     newButton.addEventListener("click", function() {
                         displayInformation(newButton.id);
                     });
@@ -87,6 +92,7 @@ function displayInformation(caseID) {
             window.location.href = "../signIn/signIn.html";
         }
         else {
+            refreshData();
             toggleCase.hidden = false;
             var data = JSON.parse(event.data);
             setLocalStorageItem("caseID", data["caseID"]);

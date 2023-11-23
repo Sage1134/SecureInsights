@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
 
 body {
-    background: url("../images/innerBackground.jpeg");
+    background: url("../images/innerBackground.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -23,8 +23,10 @@ textarea {
 }
 
 h1 {
-    color: rgb(50, 50, 100);
+    color: rgb(204, 85, 104);
     font-size: 250%;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 #caseInfo {
@@ -191,17 +193,18 @@ label {
 
 button {
     background: none;
-    font-family: monospace;
     border-style: none;
-    font-weight: 900;
+    font-family: rubik;
+    font-weight: 600;
+    transition: color 0.1s;
 }
 
 button:hover {
-    color: rgb(120, 120, 120);
+    color: rgb(150, 150, 150);
 }
 
 button:active {
-    color: rgb(160, 160, 160);
+    color: rgb(190, 190, 190);
 }
 
 #logout, #toggleCase {
@@ -218,15 +221,20 @@ button:active {
 }
 
 #logo {
-    position: absolute;
-    right: 1.75vw;
     height: 10vh;
     width: 10vh;
     opacity: 0.8;
     transition: box-shadow 2s, opacity 2s;
+    margin-right: 10px;
+    margin-left: 10px;
 }
 
 #logo:hover {
     box-shadow: 0 0 300px white;
     opacity: 0;
+}
+
+#welcomeText {
+    display: flex;
+    margin-bottom: 10px;
 }
