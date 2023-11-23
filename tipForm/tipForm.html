@@ -10,15 +10,16 @@
         <div class="container">
             <h1>Submit A Tip</h1>
             <form id="crimeForm">
-                <input type="text" id="incidentType" placeholder="Type of incident" required>
-    
-                <input type="datetime-local" id="dateTime" required>
-            
-                <input type="text" id="location" placeholder="Location of incident" required>
-            
-                <input type=text id="description" placeholder="Incident description" required></textarea>
 
-                <input type="text" id="userContact" placeholder="Contact information (optional)">
+                <input type="text" id="incidentType" placeholder="Type of incident" required maxlength="100">
+    
+                <input type="datetime-local" id="dateTime" required maxlength="50">
+            
+                <input type="text" id="location" placeholder="Location of incident" required maxlength="300">
+            
+                <input type=text id="description" placeholder="Incident description" required maxlength="1000"></textarea >
+
+                <input type="text" id="userContact" placeholder="Contact information (optional)" maxlength="300">
                 
                 <div class="checkBoxes">
                     <br>

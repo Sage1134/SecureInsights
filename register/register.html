@@ -10,13 +10,13 @@
         <div class="container">
             <h1>Register</h1>
             <form id="registerForm" onsubmit="register(event)">
-                <input type="text" id="username" placeholder="Username" required>
+                <input type="text" id="username" placeholder="Username" required maxlength="100">
                 
-                <input type="password" id="password" placeholder="Password" required>
+                <input type="password" id="password" placeholder="Password" required maxlength="100">
 
-                <input type="password" id="confirm" placeholder="Confirm Password" required>
+                <input type="password" id="confirm" placeholder="Confirm Password" required maxlength="100">
 
-                <input type="text" id="departmentID" placeholder="Department ID" required>
+                <input type="text" id="departmentID" placeholder="Department ID" required maxlength="100">
                 
                 <button type="submit">Register</button>
             </form>
