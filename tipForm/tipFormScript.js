@@ -1,3 +1,5 @@
+const anonymous = document.getElementById("anonymity");
+
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('crimeForm').addEventListener('submit', function (event) {
         event.preventDefault();
@@ -13,7 +15,6 @@ function submit(event) {
     const location = document.getElementById("location").value;
     const description = document.getElementById("description").value;
     const contactInfo = document.getElementById("userContact").value;
-    const anonymous = document.getElementById("anonymity").value;
     
     const data = {
         incidentType: incidentType,
@@ -21,8 +22,11 @@ function submit(event) {
         location: location,
         description: description,
         contactInfo: contactInfo,
-        anonymous: anonymous,
     };
+
+    if (anonymous.checked) {
+        data.contactInfo = "Anonymous";
+    }
 
     const isLocalConnection = window.location.hostname === '10.0.0.138';
     const socket = new WebSocket(isLocalConnection ? 'ws://10.0.0.138:1134' : 'ws://99.245.65.253:1134');
@@ -33,4 +37,11 @@ function submit(event) {
         alert ("Tip Submitted. Thank You!")
         socket.close(1000, "Closing Connection");
     };
+}
+
+function clearContact() {
+    const contactBox = document.getElementById("userContact");
+    if (anonymous.checked) {
+        contactBox.value = "";
+    }
 }
