@@ -120,6 +120,8 @@ async def newClientConnected(client_socket):
             await logout(client_socket)
         elif connectionPurpose == "toggle":
             await toggle(client_socket)
+        elif connectionPurpose == "RegistrationPublic":
+            await registerPublic(client_socket)
     except:
         pass
 
@@ -169,7 +171,6 @@ async def logout(client_socket):
         connectedClients.remove(client_socket)
 
 
-
 async def register(client_socket):
     try:
         username = await client_socket.recv()
@@ -181,10 +182,30 @@ async def register(client_socket):
                 hash_object = hashlib.sha256()
                 hash_object.update(password.encode())
                 hashed_password = hash_object.hexdigest()
-                setData(["Credentials", username], hashed_password)
+                setData(["Credentials", username, "password"], hashed_password)
+                setData(["Credentials", username, "accountType"], "Enforcement")
                 await client_socket.send("Registration Successful! Please Sign In.")
             else:
                 await client_socket.send("Invalid Department ID!")
+        else:
+            await client_socket.send("Username Already Taken!")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
+async def registerPublic(client_socket):
+    try:
+        username = await client_socket.recv()
+        password = await client_socket.recv()
+
+        if getData(["Credentials", username]) == None:
+            hash_object = hashlib.sha256()
+            hash_object.update(password.encode())
+            hashed_password = hash_object.hexdigest()
+            setData(["Credentials", username, "password"], hashed_password)
+            setData(["Credentials", username, "accountType"], "Public")
+            await client_socket.send("Registration Successful! Please Sign In.")
         else:
             await client_socket.send("Username Already Taken!")
     except:
@@ -201,7 +222,7 @@ async def signIn(client_socket):
         hash_object.update(password.encode())
         hashed_password = hash_object.hexdigest()
         
-        if getData(["Credentials", username]) == hashed_password:
+        if getData(["Credentials", username, "password"]) == hashed_password:
             sessionToken = str(uuid.uuid4())
 
             await addSessionToken(username, sessionToken)

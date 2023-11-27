@@ -16,7 +16,12 @@
 
                 <input type="password" id="confirm" placeholder="Confirm Password" required maxlength="100">
 
-                <input type="text" id="departmentID" placeholder="Department ID" required maxlength="100">
+                <input type="text" id="departmentID" placeholder="Department ID" maxlength="100" hidden="true">
+
+                <div class="checkBoxes">
+                    <label>Register As Law Enforcement</label>
+                    <input type="checkbox" id="regType" onclick="changeRegType()">
+                </div>
                 
                 <button type="submit">Register</button>
             </form>

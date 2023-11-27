@@ -47,6 +47,14 @@ input {
     border-color: rgb(170, 170, 170);
 }
 
+#regType {
+    padding: 8px;
+    height: auto;
+    margin: 10px;
+    margin-bottom: 24px;
+    margin-left: 5px;
+}
+
 #username {
     background-image: url("../images/usernameIcon.png");
     background-size: 20px;
@@ -126,4 +134,12 @@ button:active {
 #logo:hover {
     box-shadow: 0 0 300px white;
     opacity: 0;
+}
+
+label {
+    color: rgb(244, 244, 244);
+}
+
+.checkBoxes {
+    display: inline;
 }
