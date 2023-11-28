@@ -122,8 +122,74 @@ async def newClientConnected(client_socket):
             await toggle(client_socket)
         elif connectionPurpose == "RegistrationPublic":
             await registerPublic(client_socket)
+        elif connectionPurpose == "plusRep":
+            await plusRep(client_socket)
+        elif connectionPurpose == "minusRep":
+            await minusRep(client_socket)
     except:
         pass
+
+
+async def plusRep(client_socket):
+    try:
+        sessionID = await client_socket.recv()
+        username = await client_socket.recv()
+        caseID = await client_socket.recv()
+        if username in sessionTokens.keys():
+            if sessionTokens[username] == sessionID:
+                if getData(["Credentials", username, "accountType"]) == "Enforcement":
+                    case = getData(["crimeTips", caseID])
+                    case = dict(case)
+                    submitter = getData(["crimeTips", caseID, "submitter"])
+                    if case["approvalStatus"] == "Unreviewed":
+                        if submitter != None:
+                            setData(["Credentials", submitter, "rep"], getData(["Credentials", submitter, "rep"]) + 1)
+                            case["approvalStatus"] = "Approved"
+                    elif case["approvalStatus"] == "Denied":
+                        setData(["Credentials", submitter, "rep"], getData(["Credentials", submitter, "rep"]) + 2)
+                        case["approvalStatus"] = "Approved"
+                    setData(["crimeTips", caseID], case)
+                else:
+                    await client_socket.send("Session Invalid Or Expired")
+            else:
+                await client_socket.send("Session Invalid Or Expired")
+        else:
+            await client_socket.send("Session Invalid Or Expired")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
+async def minusRep(client_socket):
+    try:
+        sessionID = await client_socket.recv()
+        username = await client_socket.recv()
+        caseID = await client_socket.recv()
+        if username in sessionTokens.keys():
+            if sessionTokens[username] == sessionID:
+                if getData(["Credentials", username, "accountType"]) == "Enforcement":
+                    case = getData(["crimeTips", caseID])
+                    case = dict(case)
+                    submitter = getData(["crimeTips", caseID, "submitter"])
+                    if case["approvalStatus"] == "Unreviewed":
+                        if submitter != None:
+                            setData(["Credentials", submitter, "rep"], getData(["Credentials", submitter, "rep"]) - 1)
+                            case["approvalStatus"] = "Denied"
+                    elif case["approvalStatus"] == "Approved":
+                        setData(["Credentials", submitter, "rep"], getData(["Credentials", submitter, "rep"]) - 2)
+                        case["approvalStatus"] = "Denied"
+                    setData(["crimeTips", caseID], case)
+                else:
+                    await client_socket.send("Session Invalid Or Expired")
+            else:
+                await client_socket.send("Session Invalid Or Expired")
+        else:
+            await client_socket.send("Session Invalid Or Expired")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
 
 async def toggle(client_socket):
     try:
@@ -134,14 +200,16 @@ async def toggle(client_socket):
 
         if username in sessionTokens.keys():
             if sessionTokens[username] == sessionID:
-                case = getData(["crimeTips", caseID])
-                case = dict(case)
-                if toDo == "Close Case":
-                    case["caseStatus"] = "closed"
+                if getData(["Credentials", username, "accountType"]) == "Enforcement":
+                    case = getData(["crimeTips", caseID])
+                    case = dict(case)
+                    if toDo == "Close Case":
+                        case["caseStatus"] = "closed"
+                    else:
+                        case["caseStatus"] = "open"
+                    setData(["crimeTips", caseID], case)
                 else:
-                    case["caseStatus"] = "open"
-                    
-                setData(["crimeTips", caseID], case)
+                    await client_socket.send("Session Invalid Or Expired")
                 await client_socket.send("Success")
             else:
                 await client_socket.send("Session Invalid Or Expired")
@@ -184,6 +252,7 @@ async def register(client_socket):
                 hashed_password = hash_object.hexdigest()
                 setData(["Credentials", username, "password"], hashed_password)
                 setData(["Credentials", username, "accountType"], "Enforcement")
+                setData(["Credentials", username, "rep"], 0)
                 await client_socket.send("Registration Successful! Please Sign In.")
             else:
                 await client_socket.send("Invalid Department ID!")
@@ -205,6 +274,7 @@ async def registerPublic(client_socket):
             hashed_password = hash_object.hexdigest()
             setData(["Credentials", username, "password"], hashed_password)
             setData(["Credentials", username, "accountType"], "Public")
+            setData(["Credentials", username, "rep"], 0)
             await client_socket.send("Registration Successful! Please Sign In.")
         else:
             await client_socket.send("Username Already Taken!")
@@ -224,11 +294,13 @@ async def signIn(client_socket):
         
         if getData(["Credentials", username, "password"]) == hashed_password:
             sessionToken = str(uuid.uuid4())
-
             await addSessionToken(username, sessionToken)
-
             await client_socket.send(sessionToken)
-            await client_socket.send("redirect|../innerPage/innerPage.html")
+
+            if getData(["Credentials", username, "accountType"]) == "Enforcement":
+                await client_socket.send("redirect|../innerPage/innerPage.html")
+            else:
+                await client_socket.send("redirect|../tipForm/tipForm.html")
         else:
             await client_socket.send("Fail")
     except:
@@ -239,16 +311,32 @@ async def signIn(client_socket):
 async def submission(client_socket):
     try:
         data = await client_socket.recv()
-        data = json.loads(data)
+        username = await client_socket.recv()
+        sessionID = await client_socket.recv()
+        valid = False
 
+        if username in sessionTokens.keys():
+            if sessionTokens[username] == sessionID:
+                reputation = getData(["Credentials", username, "rep"])
+                valid = True
+            else:
+                reputation = 0
+        else:
+            reputation = 0
+        
+        data = json.loads(data)
         caseID = str(uuid.uuid4())
 
         while getData(["crimeTips", caseID]) != None:
-            caseID = uuid.uuid4()
+             caseID = uuid.uuid4()
         
         data["caseID"] = caseID
-
         data["caseStatus"] = "open"
+        data["rep"] = reputation
+        data["approvalStatus"] = "Unreviewed"
+
+        if valid:
+            data["submitter"] = username
 
         setData(["crimeTips", caseID], data)
 
@@ -264,9 +352,12 @@ async def refresh(client_socket):
 
         if username in sessionTokens.keys():
             if sessionTokens[username] == sessionID:
-                data = getData(["crimeTips"])
-                data = json.dumps(data)
-                await client_socket.send(data)
+                if getData(["Credentials", username, "accountType"]) == "Enforcement":
+                    data = getData(["crimeTips"])
+                    data = json.dumps(data)
+                    await client_socket.send(data)
+                else:
+                    await client_socket.send("Session Invalid Or Expired")
             else:
                 await client_socket.send("Session Invalid Or Expired")
         else:
@@ -284,9 +375,12 @@ async def getInfo(client_socket):
 
         if username in sessionTokens.keys():
             if sessionTokens[username] == sessionID:
-                data = getData(["crimeTips", caseID])
-                data = json.dumps(data)
-                await client_socket.send(data)
+                if getData(["Credentials", username, "accountType"]) == "Enforcement":
+                    data = getData(["crimeTips", caseID])
+                    data = json.dumps(data)
+                    await client_socket.send(data)
+                else:
+                    await client_socket.send("Session Invalid Or Expired")
             else:
                 await client_socket.send("Session Invalid Or Expired")
         else:

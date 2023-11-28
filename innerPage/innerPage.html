@@ -19,6 +19,10 @@
                 </div>
 
                 <div id="buttonContainer">
+                    <div id="repButtons">
+                        <button id="plusRep" onclick="plusRep()">Flag As Valid</button>
+                        <button id="minusRep" onclick="minusRep()">Flag As Invalid</button>
+                    </div>
                     <button id="toggleCase" onclick="toggleCaseStatus()">Toggle Case</button>
                     <button id="logout" onclick="logout()">Log Out</button>
                 </div>
@@ -58,6 +62,11 @@
                     <div id="inputComp">
                         <label>Case Status</label>
                         <textarea readonly id="status"></textarea>
+                    </div>
+
+                    <div id="inputComp">
+                        <label>Case Reputation Approval</label>
+                        <textarea readonly id="caseApproval"></textarea>
                     </div>
 
                     <div id="inputComp">

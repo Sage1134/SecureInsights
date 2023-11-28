@@ -8,6 +8,7 @@ const loc = document.getElementById("location");
 const contact = document.getElementById("contact");
 const description = document.getElementById("description");
 const caseStatusBox = document.getElementById("status");
+const approvalBox = document.getElementById("caseApproval");
 const welcome = document.getElementById("welcome");
 const toggleCase = document.getElementById("toggleCase");
 const logOut = document.getElementById("logout");
@@ -33,46 +34,58 @@ function refreshData() {
         socket.send(username);
     };
 
-    socket.onmessage = function(event) {
+    socket.onmessage = function (event) {
         openCases.innerHTML = "";
         closedCases.innerHTML = "";
-
+    
         if (event.data == "Session Invalid Or Expired") {
             alert("Session Invalid Or Expired");
             window.location.href = "../signIn/signIn.html";
-        }
-        else {
+        } else {
             var data = JSON.parse(event.data);
+    
+            var buttons = [];
+    
             for (key in data) {
-                (function() {
+                (function () {
                     var caseData = data[key];
-            
+    
                     var newButton = document.createElement("button");
                     newButton.style.paddingTop = "0.5vh";
                     newButton.style.paddingBottom = "0.5vh";
                     newButton.style.width = "10vw";
                     newButton.innerHTML = caseData["incidentType"];
                     newButton.id = caseData["caseID"];
-
+    
                     if (caseData["caseID"] == getLocalStorageItem("caseID")) {
                         newButton.style.color = "rgb(50, 50, 160)";
                     }
-
-                    newButton.addEventListener("click", function() {
+    
+                    newButton.addEventListener("click", function () {
                         displayInformation(newButton.id);
                     });
-            
-                    if (caseData["caseStatus"] == "open") {
-                        openCases.appendChild(newButton);
-                    }
-                    else {
-                        closedCases.appendChild(newButton);
-                    }
+    
+                    buttons.push(newButton);
                 })();
-            }            
+            }
+    
+            buttons.sort(function (a, b) {
+                var aValue = data[a.id]["rep"];
+                var bValue = data[b.id]["rep"];
+                return bValue - aValue;
+            });
+    
+            buttons.forEach(function (button) {
+                if (data[button.id]["caseStatus"] == "open") {
+                    openCases.appendChild(button);
+                } else {
+                    closedCases.appendChild(button);
+                }
+            });
         }
         socket.close(1000, "Closing Connection");
     };
+    
 }
 
 function displayInformation(caseID) {
@@ -104,6 +117,7 @@ function displayInformation(caseID) {
             contact.value = data["contactInfo"];
             description.value = data["description"];
             caseStatusBox.value = data["caseStatus"];
+            approvalBox.value = data["approvalStatus"];
             if (data["caseStatus"] == "open") {
                 toggleCase.innerHTML = "Close Case";
             }
@@ -131,6 +145,8 @@ function logout(event) {
             window.location.href = "../signIn/signIn.html";
         }
         else {
+            localStorage.removeItem("username");
+            localStorage.removeItem("sessionID");
             window.location.replace("../signIn/signIn.html")
         }
         socket.close(1000, "Closing Connection");   
@@ -168,6 +184,47 @@ function toggleCaseStatus(event) {
     };
 }
 
+function plusRep(event) {
+    const isLocalConnection = window.location.hostname === '10.0.0.138';
+    const socket = new WebSocket(isLocalConnection ? 'ws://10.0.0.138:1134' : 'ws://99.245.65.253:1134');
+
+    socket.onopen = function (event) {
+        socket.send("plusRep");
+        socket.send(sessionID);
+        socket.send(username);
+        socket.send(getLocalStorageItem("caseID"));
+    };
+
+    socket.onmessage = function(event) {
+        if (event.data == "Session Invalid Or Expired") {
+            alert("Session Invalid Or Expired");
+            window.location.href = "../signIn/signIn.html";
+        }
+        refreshData();
+        socket.close(1000, "Closing Connection");    
+    };
+}
+
+function minusRep(event) {
+    const isLocalConnection = window.location.hostname === '10.0.0.138';
+    const socket = new WebSocket(isLocalConnection ? 'ws://10.0.0.138:1134' : 'ws://99.245.65.253:1134');
+
+    socket.onopen = function (event) {
+        socket.send("minusRep");
+        socket.send(sessionID);
+        socket.send(username);
+        socket.send(getLocalStorageItem("caseID"));
+    };
+
+    socket.onmessage = function(event) {
+        if (event.data == "Session Invalid Or Expired") {
+            alert("Session Invalid Or Expired");
+            window.location.href = "../signIn/signIn.html";
+        }
+        refreshData();
+        socket.close(1000, "Closing Connection");    
+    };
+}
 function getLocalStorageItem(key) {
     return localStorage.getItem(key);
 }
