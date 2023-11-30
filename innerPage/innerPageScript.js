@@ -184,7 +184,7 @@ function toggleCaseStatus(event) {
             window.location.href = "../signIn/signIn.html";
         }
         else {
-            refreshData()
+            refreshData();
             displayInformation(getLocalStorageItem("caseID"))
             if (toggleCase.innerHTML == "Close Case") {
                 toggleCase.innerHTML = "Reopen Case";
@@ -214,6 +214,7 @@ function plusRep(event) {
             window.location.href = "../signIn/signIn.html";
         }
         refreshData();
+        displayInformation();
         socket.close(1000, "Closing Connection");    
     };
 }
@@ -235,6 +236,7 @@ function minusRep(event) {
             window.location.href = "../signIn/signIn.html";
         }
         refreshData();
+        displayInformation();
         socket.close(1000, "Closing Connection");    
     };
 }
