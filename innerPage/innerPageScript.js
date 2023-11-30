@@ -12,6 +12,8 @@ const approvalBox = document.getElementById("caseApproval");
 const welcome = document.getElementById("welcome");
 const toggleCase = document.getElementById("toggleCase");
 const logOut = document.getElementById("logout");
+const upRep = document.getElementById("plusRep");
+const downRep = document.getElementById("minusRep");
 
 const sessionID = getLocalStorageItem("sessionID");
 const username = getLocalStorageItem("username")
@@ -22,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function() {
     welcome.innerHTML = "Welcome, " + username + "!";
     localStorage.removeItem("caseID");
     toggleCase.hidden = true;
+    upRep.hidden = true;
+    downRep.hidden = true;
 })
 
 function refreshData() {
@@ -123,6 +127,15 @@ function displayInformation(caseID) {
             }
             else {
                 toggleCase.innerHTML = "Reopen Case";
+            }
+
+            if (data["submitter"] != undefined || data["submitter"] != null) {
+                upRep.hidden = false;
+                downRep.hidden = false;
+            }
+            else {
+                upRep.hidden = true;
+                downRep.hidden = true;
             }
         }
         socket.close(1000, "Closing Connection");

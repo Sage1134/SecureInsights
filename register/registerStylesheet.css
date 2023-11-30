@@ -143,3 +143,8 @@ label {
 .checkBoxes {
     display: inline;
 }
+
+#topBar {
+    display: flex;
+    justify-content:space-between;
+}

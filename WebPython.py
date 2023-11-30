@@ -126,6 +126,8 @@ async def newClientConnected(client_socket):
             await plusRep(client_socket)
         elif connectionPurpose == "minusRep":
             await minusRep(client_socket)
+        elif connectionPurpose == "getRep":
+            await getRep(client_socket)
     except:
         pass
 
@@ -181,6 +183,22 @@ async def minusRep(client_socket):
                     setData(["crimeTips", caseID], case)
                 else:
                     await client_socket.send("Session Invalid Or Expired")
+            else:
+                await client_socket.send("Session Invalid Or Expired")
+        else:
+            await client_socket.send("Session Invalid Or Expired")
+    except:
+        pass
+    finally:
+        connectedClients.remove(client_socket)
+
+async def getRep(client_socket):
+    try:
+        sessionID = await client_socket.recv()
+        username = await client_socket.recv()
+        if username in sessionTokens.keys():
+            if sessionTokens[username] == sessionID:
+                await client_socket.send(str(getData(["Credentials", username, "rep"])))
             else:
                 await client_socket.send("Session Invalid Or Expired")
         else:
